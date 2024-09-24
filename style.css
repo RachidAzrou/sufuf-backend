@@ -1,7 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     text-align: center;
     padding: 50px;
+    background-color: #f0f4f7; /* Lichte achtergrondkleur */
 }
 
 .hidden {
@@ -9,19 +10,27 @@ body {
 }
 
 .btn {
-    padding: 10px 20px;
+    padding: 15px 30px;
     margin: 10px;
+    border: none;
+    border-radius: 25px; /* Rondere knoppen */
+    font-size: 18px;
     cursor: pointer;
+    background-color: #008C8C; /* Appelblauwzeegroen */
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #007373; /* Donkerdere tint bij hover */
 }
 
 .ok {
     background-color: green;
-    color: white;
 }
 
 .nok {
     background-color: red;
-    color: white;
 }
 
 .status {
