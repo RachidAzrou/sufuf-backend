@@ -1,40 +1,44 @@
-const express = require('express'); // Zorg ervoor dat express is geïnstalleerd
-const Pusher = require('pusher'); // Zorg ervoor dat pusher is geïnstalleerd
-const path = require('path'); // Voor het bedienen van statische bestanden
+const express = require('express');
+const Pusher = require('pusher');
+const path = require('path');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = 5001;
 
-// Pusher configureren met jouw app key en cluster
 const pusher = new Pusher({
-    appId: '1869623',        // Jouw Pusher App ID
-    key: 'ffa266f1055f785864eb', // Jouw Pusher Key
-    secret: '8ea27524a66990e1dc58', // Jouw Pusher Secret
-    cluster: 'eu',             // Jouw Pusher Cluster
-    useTLS: true               // Zorg ervoor dat TLS wordt gebruikt voor veilige verbindingen
+    appId: '1869623',
+    key: 'ffa266f1055f785864eb',
+    secret: '8ea27524a66990e1dc58',
+    cluster: 'eu',
+    useTLS: true
 });
 
-// Middleware om JSON-lichaam te parseren
+// Middleware
 app.use(express.json());
-
-// Middleware om statische bestanden te serveren (zoals index.html)
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname)));
 
-// Voeg de GET-route toe om index.html te serveren
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+// Endpoint voor inloggen
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Veronderstel dat de inloggegevens correct zijn
+    if (username === 'MEFEN' && password === 'Sufuf2020') {
+        // Stel cookies in
+        res.cookie('username', username, { maxAge: 7200000, httpOnly: true }); // Geldig voor 2 uur
+        res.cookie('role', 'imam', { maxAge: 7200000, httpOnly: true });
+        res.json({ message: 'Inloggen succesvol' });
+    } else {
+        res.status(401).json({ message: 'Ongeldige inloggegevens' });
+    }
 });
 
 // Endpoint voor status updates
 app.post('/status', (req, res) => {
-    const { space, status } = req.body;
+    const status = req.body.status;
     
-    // Verstuur de status via Pusher
-    pusher.trigger('sufuf-channel', 'status-update', {
-        space: space,
-        status: status,
-    });
-
+    pusher.trigger('sufuf-channel', 'status-update', { status: status });
     res.json({ message: 'Status verstuurd' });
 });
 
