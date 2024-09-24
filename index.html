@@ -8,33 +8,60 @@
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 </head>
 <body>
-    <h1>SUFUF APP</h1>
+    <div id="app">
+        <h1>SUFUF APP</h1>
 
-    <!-- Home Screen -->
-    <div id="homescreen">
-        <h2>Kies je rol</h2>
-        <button class="btn" onclick="chooseRole('imam')">IMAM</button>
-        <button class="btn" onclick="chooseRole('vrijwilliger')">VRIJWILLIGER</button>
-    </div>
+        <!-- Login Screen -->
+        <div id="loginScreen">
+            <h2 class="white-text">Login</h2>
+            <input type="text" id="username" placeholder="Gebruikersnaam">
+            <input type="password" id="password" placeholder="Wachtwoord">
+            <button class="btn" onclick="login()">Inloggen</button>
+        </div>
 
-    <!-- IMAM Screen -->
-    <div id="imamScreen" class="hidden">
-        <h2>Status Overzicht</h2>
-        <div id="status1" class="status" style="background-color: gray;">Garage: OK</div>
-        <div id="status2" class="status" style="background-color: gray;">Eerste Verdieping: NOK</div>
-        <div id="status3" class="status" style="background-color: gray;">Tweede Verdieping: OK</div>
-    </div>
+        <!-- Home Screen -->
+        <div id="homescreen" class="hidden">
+            <h2 class="white-text">Kies je rol</h2>
+            <button class="btn" onclick="chooseRole('imam')">IMAM</button>
+            <button class="btn" onclick="chooseRole('vrijwilliger')">VRIJWILLIGER</button>
+        </div>
 
-    <!-- VRIJWILLIGER Screen -->
-    <div id="vrijwilligerScreen" class="hidden">
-        <h2>Kies je ruimte</h2>
-        <button class="btn" onclick="chooseRoom('garage')">Garage</button>
-        <button class="btn" onclick="chooseRoom('eerste')">Eerste Verdieping</button>
-        <button class="btn" onclick="chooseRoom('tweede')">Tweede Verdieping</button>
-        <div id="roomSelection" class="hidden">
-            <h3>Geef je status aan</h3>
+        <!-- IMAM Screen -->
+        <div id="imamScreen" class="hidden">
+            <h2 class="white-text">RUIMTES</h2>
+            <div class="room" id="room1">
+                <h3>Bovenverdieping</h3>
+                <div class="status" id="status1" style="background-color: gray;">OK</div>
+                <div class="status" id="status2" style="background-color: gray;">NOK</div>
+            </div>
+            <div class="room" id="room2">
+                <h3>Garage</h3>
+                <div class="status" id="status3" style="background-color: gray;">OK</div>
+                <div class="status" id="status4" style="background-color: gray;">NOK</div>
+            </div>
+            <div class="room" id="room3">
+                <h3>Vrouwen</h3>
+                <div class="status" id="status5" style="background-color: gray;">OK</div>
+                <div class="status" id="status6" style="background-color: gray;">NOK</div>
+            </div>
+            <button class="btn" onclick="goBack()">Terug</button>
+        </div>
+
+        <!-- VRIJWILLIGER Screen -->
+        <div id="vrijwilligerScreen" class="hidden">
+            <h2 class="white-text">KIES JE RUIMTE</h2>
+            <button class="btn" onclick="chooseRoom('Bovenverdieping')">Bovenverdieping</button>
+            <button class="btn" onclick="chooseRoom('Garage')">Garage</button>
+            <button class="btn" onclick="chooseRoom('Vrouwen')">Vrouwen</button>
+            <button class="btn" onclick="goBack()">Terug</button>
+        </div>
+
+        <!-- Room Status Screen for Vrijwilliger -->
+        <div id="roomStatusScreen" class="hidden">
+            <h2 class="white-text" id="roomTitle"></h2>
             <button class="btn ok" onclick="sendStatus('ok')">OK</button>
             <button class="btn nok" onclick="sendStatus('nok')">NOK</button>
+            <button class="btn" onclick="goBack()">Terug</button>
         </div>
     </div>
 
