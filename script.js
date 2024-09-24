@@ -38,7 +38,7 @@ function chooseRole(role) {
 // Functie voor de vrijwilliger om de status naar de server te sturen
 function sendStatus(status) {
     // Pas de URL aan naar je Render URL
-    fetch('https://<your-render-app-url>/status', {  // Vervang <your-render-app-url> met de werkelijke URL
+    fetch('https://sufuf-backend-2.onrender.com/status', {  // Vervang <your-render-app-url> met de werkelijke URL
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
