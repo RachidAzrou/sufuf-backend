@@ -1,40 +1,85 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif; /* Sans Serif lettertype */
+    background-color: #e9ecee; /* Lichtgrijze achtergrond, vergelijkbaar met WhatsApp */
     text-align: center;
-    padding: 50px;
-    background-color: #A2B2A0; /* Appelblauwzeegroen */
-    color: white; /* Kleur van de tekst */
+    padding: 20px;
+    margin: 0; /* Zorg ervoor dat er geen extra marges zijn */
+}
+
+.container {
+    max-width: 600px; /* Maximaal breedte voor de container */
+    margin: 0 auto; /* Center de container */
+    padding: 20px;
 }
 
 .hidden {
-    display: none;
+    display: none; /* Verberg elementen met deze klasse */
+}
+
+.screen {
+    margin: 20px 0; /* Ruimte tussen schermen */
+}
+
+h1 {
+    color: #25D366; /* WhatsApp Groen voor de hoofdtitel */
+    font-size: 32px; /* Grootte voor de hoofdtitel */
+}
+
+h2 {
+    color: #4CAF50; /* Groene kleur voor subtitels */
+    margin: 20px 0; /* Ruimte rondom subtitels */
 }
 
 .btn {
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-    background-color: white; /* Achtergrondkleur van knoppen */
-    color: #A2B2A0; /* Kleur van de tekst in knoppen */
-    border: none;
-    border-radius: 25px; /* Afgeronde hoeken */
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    padding: 15px 30px; /* Ruimte binnen de knoppen */
+    margin: 10px; /* Ruimte rondom de knoppen */
+    border-radius: 25px; /* Afgeronde knoppen */
+    border: none; /* Geen rand */
+    color: white; /* Witte tekstkleur */
+    background-color: #25D366; /* WhatsApp Groen */
+    font-size: 16px; /* Tekstgrootte */
+    cursor: pointer; /* Handcursor bij hover */
+    transition: background-color 0.3s; /* Vervagingseffect bij hover */
 }
 
 .btn:hover {
-    background-color: #A2B2A0; /* Hover-effect voor knoppen */
-    color: white; /* Hover-effect voor tekst in knoppen */
+    background-color: #128C7E; /* Donkerder groen bij hover */
 }
 
-.room {
-    margin: 20px 0;
+.ok {
+    background-color: #4CAF50; /* Groen voor OK-knop */
+}
+
+.nok {
+    background-color: #f44336; /* Rood voor NOK-knop */
 }
 
 .status {
-    font-size: 20px;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
+    font-size: 20px; /* Grotere tekst voor status */
+    margin: 20px 0; /* Ruimte rondom status */
+    padding: 10px; /* Ruimte binnen de status */
+    border-radius: 5px; /* Afgeronde hoeken */
+    color: white; /* Witte tekstkleur */
+}
+
+.status-button {
+    display: inline-block; /* Maak de knoppen in lijn */
+    background-color: gray; /* Standaardkleur voor status-knoppen */
+    color: white; /* Witte tekstkleur */
+    padding: 10px; /* Ruimte binnen de knoppen */
+    border-radius: 5px; /* Afgeronde hoeken */
+    margin: 5px 10px; /* Ruimte rondom status-knoppen */
+}
+
+.back-btn {
+    position: absolute; /* Absolute positionering voor terugknop */
+    top: 20px; /* Ruimte van boven */
+    left: 20px; /* Ruimte van links */
+    background-color: #25D366; /* WhatsApp Groen voor de terugknop */
+    color: white; /* Witte tekstkleur */
+    border: none; /* Geen rand */
+    padding: 10px 20px; /* Ruimte binnen de knoppen */
+    border-radius: 25px; /* Afgeronde hoeken */
+    cursor: pointer; /* Handcursor bij hover */
+    z-index: 1; /* Zorgt ervoor dat de knop boven andere elementen ligt */
 }
