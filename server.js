@@ -27,12 +27,12 @@ app.get('/', (req, res) => {
 
 // Endpoint voor status updates
 app.post('/status', (req, res) => {
-    const { status, room } = req.body; // Verkrijg status en kamer van de request
+    const { space, status } = req.body;
     
     // Verstuur de status via Pusher
     pusher.trigger('sufuf-channel', 'status-update', {
+        space: space,
         status: status,
-        room: room // Stuur ook de kamer door
     });
 
     res.json({ message: 'Status verstuurd' });
