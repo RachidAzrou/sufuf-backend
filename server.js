@@ -27,18 +27,4 @@ app.get('/', (req, res) => {
 
 // Endpoint voor status updates
 app.post('/status', (req, res) => {
-    const { status, room } = req.body; // Verkrijg status en kamer van de request
-    
-    // Verstuur de status via Pusher
-    pusher.trigger('sufuf-channel', 'status-update', {
-        status: status,
-        room: room // Stuur ook de kamer door
-    });
-
-    res.json({ message: 'Status verstuurd' });
-});
-
-// Start de server
-app.listen(port, () => {
-    console.log(`Server draait op http://localhost:${port}`);
-});
+    const { status, room
