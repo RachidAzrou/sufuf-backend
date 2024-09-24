@@ -19,16 +19,23 @@
 
     <!-- IMAM Screen -->
     <div id="imamScreen" class="hidden">
-        <h2>EERSTE VERDIEPING</h2>
-        <div id="status1" class="status" style="background-color: gray;">OK</div>
-        <div id="status2" class="status" style="background-color: gray;">NOK</div>
+        <h2>Status Overzicht</h2>
+        <div id="status1" class="status" style="background-color: gray;">Garage: OK</div>
+        <div id="status2" class="status" style="background-color: gray;">Eerste Verdieping: NOK</div>
+        <div id="status3" class="status" style="background-color: gray;">Tweede Verdieping: OK</div>
     </div>
 
     <!-- VRIJWILLIGER Screen -->
     <div id="vrijwilligerScreen" class="hidden">
-        <h2>EERSTE VERDIEPING</h2>
-        <button class="btn ok" onclick="sendStatus('ok')">OK</button>
-        <button class="btn nok" onclick="sendStatus('nok')">NOK</button>
+        <h2>Kies je ruimte</h2>
+        <button class="btn" onclick="chooseRoom('garage')">Garage</button>
+        <button class="btn" onclick="chooseRoom('eerste')">Eerste Verdieping</button>
+        <button class="btn" onclick="chooseRoom('tweede')">Tweede Verdieping</button>
+        <div id="roomSelection" class="hidden">
+            <h3>Geef je status aan</h3>
+            <button class="btn ok" onclick="sendStatus('ok')">OK</button>
+            <button class="btn nok" onclick="sendStatus('nok')">NOK</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
