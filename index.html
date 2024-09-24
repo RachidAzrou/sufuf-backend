@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUFUF APP</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+</head>
+<body>
+    <h1>SUFUF APP</h1>
+
+    <!-- Home Screen -->
+    <div id="homescreen">
+        <h2>Kies je rol</h2>
+        <button class="btn" onclick="chooseRole('imam')">IMAM</button>
+        <button class="btn" onclick="chooseRole('vrijwilliger')">VRIJWILLIGER</button>
+    </div>
+
+    <!-- IMAM Screen -->
+    <div id="imamScreen" class="hidden">
+        <h2>EERSTE VERDIEPING</h2>
+        <div id="status1" class="status" style="background-color: gray;">OK</div>
+        <div id="status2" class="status" style="background-color: gray;">NOK</div>
+    </div>
+
+    <!-- VRIJWILLIGER Screen -->
+    <div id="vrijwilligerScreen" class="hidden">
+        <h2>EERSTE VERDIEPING</h2>
+        <button class="btn ok" onclick="sendStatus('ok')">OK</button>
+        <button class="btn nok" onclick="sendStatus('nok')">NOK</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
