@@ -1,9 +1,7 @@
-// Pusher configureren met jouw app key en cluster
 const pusher = new Pusher('ffa266f1055f785864eb', {
-    cluster: 'eu'
+    cluster: 'eu' // Jouw Pusher Cluster
 });
 
-// Abonneer op het Pusher-kanaal
 const channel = pusher.subscribe('sufuf-channel');
 
 // Pusher event listener voor het ontvangen van real-time updates van de vrijwilliger
@@ -13,11 +11,19 @@ channel.bind('status-update', function(data) {
 
 // Functie om het statusveld voor de IMAM te updaten
 function updateStatus(status, room) {
-    const statusElement = document.getElementById(`status${room}`);
+    const roomStatusMap = {
+        'Bovenverdieping': ['status1', 'status2'],
+        'Garage': ['status3', 'status4'],
+        'Vrouwen': ['status5', 'status6']
+    };
+    const [okId, nokId] = roomStatusMap[room];
+
     if (status === 'ok') {
-        statusElement.style.backgroundColor = 'green';
+        document.getElementById(okId).style.backgroundColor = 'green';
+        document.getElementById(nokId).style.backgroundColor = 'gray';
     } else if (status === 'nok') {
-        statusElement.style.backgroundColor = 'red';
+        document.getElementById(okId).style.backgroundColor = 'gray';
+        document.getElementById(nokId).style.backgroundColor = 'red';
     }
 }
 
@@ -31,23 +37,47 @@ function chooseRole(role) {
     }
 }
 
-// Functie om de ruimte van de vrijwilliger te kiezen
+// Functie voor de vrijwilliger om een ruimte te kiezen
 function chooseRoom(room) {
-    document.getElementById('roomSelection').classList.remove('hidden');
-    // Hier kan je de logica toevoegen om te controleren of iemand al is ingelogd in de ruimte
+    document.getElementById('vrijwilligerScreen').classList.add('hidden');
+    document.getElementById('roomStatusScreen').classList.remove('hidden');
+    document.getElementById('roomTitle').textContent = room; // Zet de titel van de ruimte
 }
 
 // Functie voor de vrijwilliger om de status naar de server te sturen
 function sendStatus(status) {
-    const selectedRoom = document.querySelector('#roomSelection h3').innerText; // aanname dat je de ruimte weet
+    const room = document.getElementById('roomTitle').textContent; // Verkrijg de huidige ruimte
     fetch('https://sufuf-backend-2.onrender.com/status', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ status: status, room: selectedRoom }), // Stuur de status en kamer mee
+        body: JSON.stringify({ status: status, room: room }),
     })
     .then(response => response.json())
     .then(data => console.log(data))
     .catch((error) => console.error('Error:', error));
+}
+
+// Functie om terug te gaan naar de vorige pagina
+function goBack() {
+    if (!document.getElementById('homescreen').classList.contains('hidden')) return; // Als op homescreen, kan niet terug
+    document.getElementById('imamScreen').classList.add('hidden');
+    document.getElementById('vrijwilligerScreen').classList.add('hidden');
+    document.getElementById('roomStatusScreen').classList.add('hidden');
+    document.getElementById('homescreen').classList.remove('hidden');
+}
+
+// Functie voor inloggen
+function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Eenvoudige validatie (hardcoded)
+    if (username === 'MEFEN' && password === 'Sufuf2020') {
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('homescreen').classList.remove('hidden');
+    } else {
+        alert('Ongeldige inloggegevens');
+    }
 }
