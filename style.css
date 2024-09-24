@@ -1,74 +1,34 @@
 body {
-    font-family: 'Roboto', sans-serif; /* Modern lettertype */
+    font-family: 'Arial', sans-serif; /* Verander naar een modernere font */
     text-align: center;
     padding: 50px;
-    background-color: #d0e9e3; /* Appelblauwzeegroen kleur */
-    color: #333;
-}
-
-.container {
-    max-width: 600px;
-    margin: 0 auto;
+    background-color: #e0f7fa; /* Appelblauwzeegroen achtergrond */
 }
 
 .hidden {
     display: none;
 }
 
-.screen {
-    padding: 20px;
-}
-
-h1, h2, h3 {
-    margin: 20px 0;
-}
-
-input {
-    padding: 10px;
-    margin: 10px 0;
-    width: calc(100% - 20px);
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
 .btn {
-    padding: 10px 20px;
+    padding: 15px 25px;
     margin: 10px;
     cursor: pointer;
-    border-radius: 20px; /* Afgeronde knoppen */
     border: none;
-    color: white;
-    background-color: #007b5f; /* Groene knop kleur */
-    transition: background-color 0.3s;
+    border-radius: 25px; /* Maak knoppen mooi afgerond */
+    font-size: 18px; /* Grotere tekst */
+    background-color: white; /* Witte achtergrond voor knoppen */
+    color: #00796b; /* Appelblauwzeegroen tekst */
 }
 
-.btn.ok {
-    background-color: green;
-}
-
-.btn.nok {
-    background-color: red;
-}
-
-.btn:hover {
-    background-color: #005f4f; /* Donkerder groen bij hover */
-}
-
-.back-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: transparent;
-    color: #007b5f;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
+.space {
+    margin: 20px 0;
 }
 
 .status {
     font-size: 20px;
-    margin: 20px 0;
-    padding: 10px;
+    margin: 10px 0;
+    padding: 15px;
     border-radius: 5px;
     color: white;
+    display: inline-block; /* Zorg ervoor dat ze naast elkaar worden weergegeven */
 }
