@@ -1,6 +1,6 @@
 // Pusher configureren met jouw app key en cluster
 const pusher = new Pusher('ffa266f1055f785864eb', {
-    cluster: 'eu' // Jouw Pusher Cluster
+    cluster: 'eu'
 });
 
 // Abonneer op het Pusher-kanaal
@@ -8,20 +8,16 @@ const channel = pusher.subscribe('sufuf-channel');
 
 // Pusher event listener voor het ontvangen van real-time updates van de vrijwilliger
 channel.bind('status-update', function(data) {
-    updateStatus(data.status);
+    updateStatus(data.status, data.room);
 });
 
 // Functie om het statusveld voor de IMAM te updaten
-function updateStatus(status) {
-    const status1 = document.getElementById('status1');
-    const status2 = document.getElementById('status2');
-    
+function updateStatus(status, room) {
+    const statusElement = document.getElementById(`status${room}`);
     if (status === 'ok') {
-        status1.style.backgroundColor = 'green';
-        status2.style.backgroundColor = 'gray';
+        statusElement.style.backgroundColor = 'green';
     } else if (status === 'nok') {
-        status1.style.backgroundColor = 'gray';
-        status2.style.backgroundColor = 'red';
+        statusElement.style.backgroundColor = 'red';
     }
 }
 
@@ -35,15 +31,21 @@ function chooseRole(role) {
     }
 }
 
+// Functie om de ruimte van de vrijwilliger te kiezen
+function chooseRoom(room) {
+    document.getElementById('roomSelection').classList.remove('hidden');
+    // Hier kan je de logica toevoegen om te controleren of iemand al is ingelogd in de ruimte
+}
+
 // Functie voor de vrijwilliger om de status naar de server te sturen
 function sendStatus(status) {
-    // Pas de URL aan naar je Render URL
-    fetch('https://sufuf-backend-2.onrender.com/status', {  // Vervang <your-render-app-url> met de werkelijke URL
+    const selectedRoom = document.querySelector('#roomSelection h3').innerText; // aanname dat je de ruimte weet
+    fetch('https://sufuf-backend-2.onrender.com/status', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ status: status }),
+        body: JSON.stringify({ status: status, room: selectedRoom }), // Stuur de status en kamer mee
     })
     .then(response => response.json())
     .then(data => console.log(data))
