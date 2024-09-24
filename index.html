@@ -3,65 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sufuf-app</title>
+    <title>SUFUF APP</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Modern lettertype -->
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Login Screen -->
-        <div id="loginScreen" class="screen">
-            <h1>Sufuf-app</h1>
-            <input type="text" id="username" placeholder="Gebruikersnaam" required>
-            <input type="password" id="password" placeholder="Wachtwoord" required>
-            <button class="btn" onclick="login()">Inloggen</button>
-        </div>
+    <h1>SUFUF APP</h1>
 
-        <!-- Home Screen -->
-        <div id="homescreen" class="hidden screen">
-            <h2>Kies je rol</h2>
-            <button class="btn" onclick="chooseRole('imam')">IMAM</button>
-            <button class="btn" onclick="chooseRole('vrijwilliger')">VRIJWILLIGER</button>
-        </div>
+    <!-- Login Screen -->
+    <div id="loginScreen">
+        <h2>Inloggen</h2>
+        <input type="text" id="username" placeholder="Gebruikersnaam" />
+        <input type="password" id="password" placeholder="Wachtwoord" />
+        <button class="btn" onclick="login()">Inloggen</button>
+    </div>
 
-        <!-- IMAM Screen -->
-        <div id="imamScreen" class="hidden screen">
-            <button class="back-btn" onclick="goBack()">Terug</button>
-            <h2>RUIMTES</h2>
-            <div>
-                <h3>Bovenverdieping</h3>
-                <div class="status" style="background-color: gray;">OK</div>
-                <div class="status" style="background-color: gray;">NOK</div>
-            </div>
-            <div>
-                <h3>Garage</h3>
-                <div class="status" style="background-color: gray;">OK</div>
-                <div class="status" style="background-color: gray;">NOK</div>
-            </div>
-            <div>
-                <h3>Vrouwen</h3>
-                <div class="status" style="background-color: gray;">OK</div>
-                <div class="status" style="background-color: gray;">NOK</div>
-            </div>
-        </div>
+    <!-- Home Screen -->
+    <div id="homescreen" class="hidden">
+        <h2>Kies je rol</h2>
+        <button class="btn" onclick="chooseRole('imam')">IMAM</button>
+        <button class="btn" onclick="chooseRole('vrijwilliger')">VRIJWILLIGER</button>
+    </div>
 
-        <!-- VRIJWILLIGER Screen -->
-        <div id="vrijwilligerScreen" class="hidden screen">
-            <button class="back-btn" onclick="goBack()">Terug</button>
-            <h2>KIES JE RUIMTE</h2>
-            <button class="btn" onclick="chooseSpace('Bovenverdieping')">Bovenverdieping</button>
-            <button class="btn" onclick="chooseSpace('Garage')">Garage</button>
-            <button class="btn" onclick="chooseSpace('Vrouwen')">Vrouwen</button>
+    <!-- IMAM Screen -->
+    <div id="imamScreen" class="hidden">
+        <h2>RUIMTES</h2>
+        <div class="space">
+            <h3>Bovenverdieping</h3>
+            <div class="status" id="bovenverdiepingStatus" style="background-color: gray;">OK</div>
+            <div class="status" id="bovenverdiepingNok" style="background-color: gray;">NOK</div>
         </div>
+        <div class="space">
+            <h3>Garage</h3>
+            <div class="status" id="garageStatus" style="background-color: gray;">OK</div>
+            <div class="status" id="garageNok" style="background-color: gray;">NOK</div>
+        </div>
+        <div class="space">
+            <h3>Vrouwen</h3>
+            <div class="status" id="vrouwenStatus" style="background-color: gray;">OK</div>
+            <div class="status" id="vrouwenNok" style="background-color: gray;">NOK</div>
+        </div>
+        <button class="btn back" onclick="goBack('homescreen')">Terug</button>
+    </div>
 
-        <!-- Ruimte Screen -->
-        <div id="ruimteScreen" class="hidden screen">
-            <button class="back-btn" onclick="goBack()">Terug</button>
-            <h2 id="ruimteTitel"></h2>
-            <button class="btn ok" onclick="sendStatus('ok')">OK</button>
-            <button class="btn nok" onclick="sendStatus('nok')">NOK</button>
-        </div>
+    <!-- VRIJWILLIGER Screen -->
+    <div id="vrijwilligerScreen" class="hidden">
+        <h2>KIES JE RUIMTE</h2>
+        <button class="btn" onclick="chooseSpace('bovenverdieping')">Bovenverdieping</button>
+        <button class="btn" onclick="chooseSpace('garage')">Garage</button>
+        <button class="btn" onclick="chooseSpace('vrouwen')">Vrouwen</button>
+    </div>
+
+    <!-- Space Screen -->
+    <div id="spaceScreen" class="hidden">
+        <h2 id="spaceTitle"></h2>
+        <button class="btn ok" onclick="sendStatus('ok')">OK</button>
+        <button class="btn nok" onclick="sendStatus('nok')">NOK</button>
+        <button class="btn back" onclick="goBack('vrijwilligerScreen')">Terug</button>
     </div>
 
     <script src="script.js"></script>
