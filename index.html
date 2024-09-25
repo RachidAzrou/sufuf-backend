@@ -3,72 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sufuf App</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <title>Sufuf App</title>
 </head>
 <body>
-    <header>
-        <button class="btn logout" onclick="logout()">Log Uit</button>
-    </header>
 
-    <h1 class="app-title">Sufuf App</h1>
-
-    <!-- Login Screen -->
-    <div id="loginScreen">
-        <h2>Inloggen</h2>
-        <div class="input-container">
-            <input type="text" id="username" placeholder="Gebruikersnaam" />
-            <input type="password" id="password" placeholder="Wachtwoord" />
+    <div id="loginScreen" class="screen">
+        <h1 class="app-title">Sufuf App</h1>
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Gebruikersnaam" required>
+            <input type="password" id="password" placeholder="Wachtwoord" required>
             <button class="btn" onclick="login()">Inloggen</button>
         </div>
     </div>
 
-    <!-- Home Screen -->
-    <div id="homescreen" class="hidden">
-        <button class="btn back" onclick="goBack('loginScreen')">Terug</button>
-        <h2>Kies je rol</h2>
-        <button class="btn" onclick="chooseRole('imam')">IMAM</button>
-        <button class="btn" onclick="chooseRole('vrijwilliger')">VRIJWILLIGER</button>
+    <div id="homescreen" class="screen hidden">
+        <button class="btn back-btn" onclick="goBack('loginScreen')">Terug</button>
+        <h1 class="app-title">Sufuf App</h1>
+        <h2 class="role-title">Kies je rol</h2>
+        <div class="role-buttons">
+            <button class="btn" onclick="chooseRole('imam')">Imam</button>
+            <button class="btn" onclick="chooseRole('vrijwilliger')">Vrijwilliger</button>
+        </div>
+        <button class="btn logout-btn" onclick="logout()">Log uit</button>
     </div>
 
-    <!-- IMAM Screen -->
-    <div id="imamScreen" class="hidden">
-        <button class="btn back" onclick="goBack('homescreen')">Terug</button>
-        <h2 class="room-title">RUIMTES</h2>
-        <div class="space">
-            <h3>Bovenverdieping</h3>
-            <div class="status" id="bovenverdiepingStatus">OK</div>
-            <div class="status" id="bovenverdiepingNok">NOK</div>
+    <div id="imamScreen" class="screen hidden">
+        <button class="btn back-btn" onclick="goBack('homescreen')">Terug</button>
+        <h1 class="app-title">Sufuf App</h1>
+        <h2 class="room-title">Ruimtes</h2>
+        <div class="room">
+            <h3 class="room-name">Bovenverdieping</h3>
+            <button class="btn ok-btn" onclick="selectRoom('Bovenverdieping', 'OK')">OK</button>
+            <button class="btn nok-btn" onclick="selectRoom('Bovenverdieping', 'NOK')">NOK</button>
         </div>
-        <div class="space">
-            <h3>Garage</h3>
-            <div class="status" id="garageStatus">OK</div>
-            <div class="status" id="garageNok">NOK</div>
+        <div class="room">
+            <h3 class="room-name">Garage</h3>
+            <button class="btn ok-btn" onclick="selectRoom('Garage', 'OK')">OK</button>
+            <button class="btn nok-btn" onclick="selectRoom('Garage', 'NOK')">NOK</button>
         </div>
-        <div class="space">
-            <h3>Vrouwen</h3>
-            <div class="status" id="vrouwenStatus">OK</div>
-            <div class="status" id="vrouwenNok">NOK</div>
+        <div class="room">
+            <h3 class="room-name">Vrouwen</h3>
+            <button class="btn ok-btn" onclick="selectRoom('Vrouwen', 'OK')">OK</button>
+            <button class="btn nok-btn" onclick="selectRoom('Vrouwen', 'NOK')">NOK</button>
         </div>
     </div>
 
-    <!-- VRIJWILLIGER Screen -->
-    <div id="vrijwilligerScreen" class="hidden">
-        <button class="btn back" onclick="goBack('homescreen')">Terug</button>
-        <h2>KIES JE RUIMTE</h2>
-        <button class="btn" onclick="chooseSpace('bovenverdieping')">Bovenverdieping</button>
-        <button class="btn" onclick="chooseSpace('garage')">Garage</button>
-        <button class="btn" onclick="chooseSpace('vrouwen')">Vrouwen</button>
-    </div>
-
-    <!-- Space Screen -->
-    <div id="spaceScreen" class="hidden">
-        <button class="btn back" onclick="goBack('vrijwilligerScreen')">Terug</button>
-        <h2 id="spaceTitle"></h2>
-        <button class="btn ok" onclick="sendStatus('ok')">OK</button>
-        <button class="btn nok" onclick="sendStatus('nok')">NOK</button>
-        <div id="statusMessage" class="status-message hidden"></div>
+    <div id="vrijwilligerScreen" class="screen hidden">
+        <button class="btn back-btn" onclick="goBack('homescreen')">Terug</button>
+        <h1 class="app-title">Sufuf App</h1>
+        <h2 class="room-title">Kies je ruimte</h2>
+        <div class="room">
+            <button class="btn room-btn" onclick="selectRoom('Bovenverdieping')">Bovenverdieping</button>
+            <button class="btn room-btn" onclick="selectRoom('Garage')">Garage</button>
+            <button class="btn room-btn" onclick="selectRoom('Vrouwen')">Vrouwen</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
