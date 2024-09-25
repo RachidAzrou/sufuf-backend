@@ -23,12 +23,14 @@ app.use(express.static(path.join(__dirname)));
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
-    // Veronderstel dat de inloggegevens correct zijn
     if (username === 'MEFEN' && password === 'Sufuf2020') {
-        // Stel cookies in
-        res.cookie('username', username, { maxAge: 7200000, httpOnly: true }); // Geldig voor 2 uur
+        res.cookie('username', username, { maxAge: 7200000, httpOnly: true }); // 2 uur
         res.cookie('role', 'imam', { maxAge: 7200000, httpOnly: true });
-        res.json({ message: 'Inloggen succesvol' });
+        res.json({ message: 'Inloggen succesvol', role: 'imam' });
+    } else if (username === 'Vrijwilliger' && password === 'Sufuf2020') {
+        res.cookie('username', username, { maxAge: 7200000, httpOnly: true });
+        res.cookie('role', 'vrijwilliger', { maxAge: 7200000, httpOnly: true });
+        res.json({ message: 'Inloggen succesvol', role: 'vrijwilliger' });
     } else {
         res.status(401).json({ message: 'Ongeldige inloggegevens' });
     }
@@ -36,9 +38,9 @@ app.post('/login', (req, res) => {
 
 // Endpoint voor status updates
 app.post('/status', (req, res) => {
-    const status = req.body.status;
+    const { space, status } = req.body;
     
-    pusher.trigger('sufuf-channel', 'status-update', { status: status });
+    pusher.trigger('sufuf-channel', 'status-update', { space, status });
     res.json({ message: 'Status verstuurd' });
 });
 
