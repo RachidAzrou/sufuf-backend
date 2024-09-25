@@ -1,46 +1,40 @@
-const express = require('express');
-const Pusher = require('pusher');
-const path = require('path');
-const cookieParser = require('cookie-parser');
+const express = require('express'); // Zorg ervoor dat express is geïnstalleerd
+const Pusher = require('pusher'); // Zorg ervoor dat pusher is geïnstalleerd
+const path = require('path'); // Voor het bedienen van statische bestanden
 
 const app = express();
 const port = 5001;
 
+// Pusher configureren met jouw app key en cluster
 const pusher = new Pusher({
-    appId: '1869623',
-    key: 'ffa266f1055f785864eb',
-    secret: '8ea27524a66990e1dc58',
-    cluster: 'eu',
-    useTLS: true
+    appId: '1869623',        // Jouw Pusher App ID
+    key: 'ffa266f1055f785864eb', // Jouw Pusher Key
+    secret: '8ea27524a66990e1dc58', // Jouw Pusher Secret
+    cluster: 'eu',             // Jouw Pusher Cluster
+    useTLS: true               // Zorg ervoor dat TLS wordt gebruikt voor veilige verbindingen
 });
 
-// Middleware
+// Middleware om JSON-lichaam te parseren
 app.use(express.json());
-app.use(cookieParser());
+
+// Middleware om statische bestanden te serveren (zoals index.html)
 app.use(express.static(path.join(__dirname)));
 
-// Endpoint voor inloggen
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-
-    if (username === 'MEFEN' && password === 'Sufuf2020') {
-        res.cookie('username', username, { maxAge: 7200000, httpOnly: true }); // 2 uur
-        res.cookie('role', 'imam', { maxAge: 7200000, httpOnly: true });
-        res.json({ message: 'Inloggen succesvol', role: 'imam' });
-    } else if (username === 'Vrijwilliger' && password === 'Sufuf2020') {
-        res.cookie('username', username, { maxAge: 7200000, httpOnly: true });
-        res.cookie('role', 'vrijwilliger', { maxAge: 7200000, httpOnly: true });
-        res.json({ message: 'Inloggen succesvol', role: 'vrijwilliger' });
-    } else {
-        res.status(401).json({ message: 'Ongeldige inloggegevens' });
-    }
+// Voeg de GET-route toe om index.html te serveren
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Endpoint voor status updates
 app.post('/status', (req, res) => {
     const { space, status } = req.body;
     
-    pusher.trigger('sufuf-channel', 'status-update', { space, status });
+    // Verstuur de status via Pusher
+    pusher.trigger('sufuf-channel', 'status-update', {
+        space: space,
+        status: status,
+    });
+
     res.json({ message: 'Status verstuurd' });
 });
 
