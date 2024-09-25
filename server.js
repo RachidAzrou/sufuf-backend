@@ -1,6 +1,7 @@
 const express = require('express'); // Zorg ervoor dat express is geïnstalleerd
 const Pusher = require('pusher'); // Zorg ervoor dat pusher is geïnstalleerd
 const path = require('path'); // Voor het bedienen van statische bestanden
+const session = require('express-session'); // Voor sessiebeheer
 
 const app = express();
 const port = 5001;
@@ -16,6 +17,13 @@ const pusher = new Pusher({
 
 // Middleware om JSON-lichaam te parseren
 app.use(express.json());
+
+// Middleware voor sessiebeheer
+app.use(session({
+    secret: 'je-geheime-sleutel', // Kies een sterke geheime sleutel
+    resave: false,
+    saveUninitialized: true,
+}));
 
 // Middleware om statische bestanden te serveren (zoals index.html)
 app.use(express.static(path.join(__dirname)));
@@ -36,6 +44,29 @@ app.post('/status', (req, res) => {
     });
 
     res.json({ message: 'Status verstuurd' });
+});
+
+// Endpoint voor login
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Eenvoudige verificatie (verander dit in je echte verificatielogica)
+    if (username === 'MEFEN' && password === 'Sufuf2020') {
+        req.session.loggedIn = true; // Stel sessie in als ingelogd
+        res.json({ success: true });
+    } else {
+        res.status(401).json({ success: false, message: 'Ongeldige inloggegevens' });
+    }
+});
+
+// Endpoint voor uitloggen
+app.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Uitloggen mislukt' });
+        }
+        res.json({ success: true });
+    });
 });
 
 // Start de server
