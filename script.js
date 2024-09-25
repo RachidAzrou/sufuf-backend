@@ -36,11 +36,19 @@ function login() {
     const password = document.getElementById('password').value;
 
     if (username === 'MEFEN' && password === 'Sufuf2020') {
+        sessionStorage.setItem('loggedIn', true); // Sla de inlogstatus op
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('homescreen').classList.remove('hidden');
     } else {
         alert('Ongeldige inloggegevens');
     }
+}
+
+// Functie om uit te loggen
+function logout() {
+    sessionStorage.removeItem('loggedIn'); // Verwijder de inlogstatus
+    document.getElementById('homescreen').classList.add('hidden');
+    document.getElementById('loginScreen').classList.remove('hidden');
 }
 
 // Functie om de rol van de gebruiker te kiezen
@@ -82,3 +90,12 @@ function goBack(page) {
     pages.forEach(p => document.getElementById(p).classList.add('hidden'));
     document.getElementById(page).classList.remove('hidden');
 }
+
+// Controleer bij het laden van de pagina of de gebruiker is ingelogd
+window.onload = function() {
+    const loggedIn = sessionStorage.getItem('loggedIn');
+    if (loggedIn) {
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('homescreen').classList.remove('hidden');
+    }
+};
