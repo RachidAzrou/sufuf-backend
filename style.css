@@ -1,101 +1,87 @@
 body {
-    font-family: 'Arial', sans-serif; /* Modern lettertype */
+    font-family: 'Arial', sans-serif;
     text-align: center;
     padding: 50px;
-    background-color: #f9f9f9; /* Lichtere achtergrondkleur */
-}
-
-header {
-    display: flex;
-    justify-content: flex-end;
-    padding: 20px;
-}
-
-.btn {
-    padding: 15px 25px; /* Grotere knoppen */
-    margin: 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 25px; /* Maak knoppen mooi afgerond */
-    font-size: 18px; /* Grotere tekst */
-    background-color: #00796b; /* Appelblauwzeegroen kleur */
-    color: white; /* Witte tekst */
-    transition: background-color 0.3s;
-}
-
-.btn:hover {
-    background-color: #004d40; /* Donkerder groen bij hover */
-}
-
-.input-container {
-    display: flex;
-    flex-direction: column; /* Zorg ervoor dat ze onder elkaar staan */
-    align-items: center;
-}
-
-input {
-    padding: 15px;
-    margin: 10px 0;
-    border: 1px solid #b2dfdb; /* Lichte scheidingslijn */
-    border-radius: 5px; /* Afgeronde hoeken voor inputvelden */
-    width: 250px; /* Vaste breedte voor inputvelden */
-    font-size: 18px; /* Grotere tekst voor inputvelden */
-}
-
-.hidden {
-    display: none;
+    background-color: #e0f7fa;
 }
 
 .app-title {
+    font-size: 48px; /* Grotere titel */
+    font-weight: bold;
+    color: #00796b;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column; /* Stapel de invoervelden en de knop onder elkaar */
+    align-items: center;
+}
+
+.input-group input {
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 20px;
+    width: 80%; /* Brede invoervelden */
+}
+
+.btn {
+    padding: 15px 25px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    background-color: #00796b;
+    color: white; /* Witte tekst voor knoppen */
+}
+
+.back-btn, .logout-btn {
+    position: absolute;
+    top: 20px;
+}
+
+.back-btn {
+    left: 20px; /* Linkerbovenhoek */
+}
+
+.logout-btn {
+    right: 20px; /* Rechteronderhoek */
+}
+
+.role-title {
     font-size: 36px; /* Grotere titel */
-    font-weight: bold; /* Dikke tekst voor de titel */
-    color: #00796b; /* Appelblauwzeegroen kleur */
-    margin-bottom: 20px; /* Ruimte onder de titel */
+    color: #00796b;
+    margin: 30px 0;
+}
+
+.role-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Ruimte tussen de knoppen */
 }
 
 .room-title {
-    font-size: 28px; /* Grote titel voor de ruimtes */
-    color: #00796b; /* Appelblauwzeegroen kleur */
-    margin-top: 30px; /* Ruimte boven de titel */
-    margin-bottom: 20px; /* Ruimte onder de titel */
+    font-size: 36px; /* Grotere titel */
+    color: #00796b;
+    margin: 30px 0;
 }
 
-.space {
+.room {
     margin: 20px 0;
-    padding: 10px; /* Ruimte rondom de ruimte sectie */
-    border: 1px solid #b2dfdb; /* Lichte scheidingslijn */
-    border-radius: 8px; /* Afgeronde hoeken voor de secties */
-    background-color: #ffffff; /* Witte achtergrond voor ruimte sectie */
 }
 
-.status {
-    font-size: 20px;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 5px;
-    display: inline-block; /* Zorg ervoor dat ze naast elkaar worden weergegeven */
+.room-name {
+    font-size: 28px; /* Grote naam voor ruimtes */
+    color: #00796b; /* Ruimte kleur */
 }
 
-.ok {
-    background-color: green; /* OK status kleur */
+.ok-btn, .nok-btn {
+    width: 100px; /* Brede knoppen */
+    margin: 5px; /* Ruimte tussen de knoppen */
+    background-color: #4CAF50; /* Groene achtergrond voor OK */
 }
 
-.nok {
-    background-color: red; /* NOK status kleur */
-}
-
-.status-message {
-    margin-top: 20px; /* Ruimte boven de statusmelding */
-    font-size: 18px; /* Grotere tekst voor statusmeldingen */
-    color: #ffffff; /* Witte tekst */
-    padding: 10px; /* Ruimte rondom de statusmelding */
-    border-radius: 5px; /* Afgeronde hoeken */
-}
-
-.ok.visible {
-    background-color: green; /* Groene achtergrond voor de melding */
-}
-
-.nok.visible {
-    background-color: red; /* Rode achtergrond voor de melding */
+.nok-btn {
+    background-color: #f44336; /* Rode achtergrond voor NOK */
 }
