@@ -1,17 +1,45 @@
-:root {
-    --primary-color: #00796b; /* Appelblauwzeegroen */
-    --secondary-color: #80cbc4; /* Lichtere blauwgroen */
-    --background-color: #e0f7fa; /* Appelblauwzeegroen achtergrond */
-    --white: #ffffff;
-    --gray: #b2dfdb; /* Lichte grijs voor scheidingslijnen */
-    --dark-gray: #004d40; /* Donkere kleur voor tekst */
-}
-
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif; /* Modern lettertype */
     text-align: center;
     padding: 50px;
-    background-color: var(--background-color);
+    background-color: #f9f9f9; /* Lichtere achtergrondkleur */
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+.btn {
+    padding: 15px 25px; /* Grotere knoppen */
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px; /* Maak knoppen mooi afgerond */
+    font-size: 18px; /* Grotere tekst */
+    background-color: #00796b; /* Appelblauwzeegroen kleur */
+    color: white; /* Witte tekst */
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #004d40; /* Donkerder groen bij hover */
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column; /* Zorg ervoor dat ze onder elkaar staan */
+    align-items: center;
+}
+
+input {
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #b2dfdb; /* Lichte scheidingslijn */
+    border-radius: 5px; /* Afgeronde hoeken voor inputvelden */
+    width: 250px; /* Vaste breedte voor inputvelden */
+    font-size: 18px; /* Grotere tekst voor inputvelden */
 }
 
 .hidden {
@@ -19,42 +47,25 @@ body {
 }
 
 .app-title {
-    font-size: 36px;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: 20px;
+    font-size: 36px; /* Grotere titel */
+    font-weight: bold; /* Dikke tekst voor de titel */
+    color: #00796b; /* Appelblauwzeegroen kleur */
+    margin-bottom: 20px; /* Ruimte onder de titel */
 }
 
 .room-title {
-    font-size: 28px;
-    color: var(--primary-color);
-    margin-top: 30px;
-    margin-bottom: 20px;
+    font-size: 28px; /* Grote titel voor de ruimtes */
+    color: #00796b; /* Appelblauwzeegroen kleur */
+    margin-top: 30px; /* Ruimte boven de titel */
+    margin-bottom: 20px; /* Ruimte onder de titel */
 }
 
 .space {
     margin: 20px 0;
-    padding: 10px;
-    border: 1px solid var(--gray);
-    border-radius: 8px;
-    background-color: var(--white);
-}
-
-.btn {
-    padding: 15px 25px;
-    margin: 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 25px;
-    font-size: 18px;
-    background-color: var(--white);
-    color: var(--primary-color);
-    transition: background-color 0.3s;
-}
-
-.btn:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
+    padding: 10px; /* Ruimte rondom de ruimte sectie */
+    border: 1px solid #b2dfdb; /* Lichte scheidingslijn */
+    border-radius: 8px; /* Afgeronde hoeken voor de secties */
+    background-color: #ffffff; /* Witte achtergrond voor ruimte sectie */
 }
 
 .status {
@@ -62,48 +73,29 @@ body {
     margin: 10px 0;
     padding: 15px;
     border-radius: 5px;
-    color: var(--white);
-    display: inline-block;
+    display: inline-block; /* Zorg ervoor dat ze naast elkaar worden weergegeven */
 }
 
-.status.ok {
-    background-color: green;
+.ok {
+    background-color: green; /* OK status kleur */
 }
 
-.status.nok {
-    background-color: red;
+.nok {
+    background-color: red; /* NOK status kleur */
 }
 
-.logout-btn {
-    float: right;
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    background-color: var(--secondary-color);
-    color: var(--white);
-    cursor: pointer;
-    transition: background-color 0.3s;
+.status-message {
+    margin-top: 20px; /* Ruimte boven de statusmelding */
+    font-size: 18px; /* Grotere tekst voor statusmeldingen */
+    color: #ffffff; /* Witte tekst */
+    padding: 10px; /* Ruimte rondom de statusmelding */
+    border-radius: 5px; /* Afgeronde hoeken */
 }
 
-.logout-btn:hover {
-    background-color: var(--primary-color);
+.ok.visible {
+    background-color: green; /* Groene achtergrond voor de melding */
 }
 
-.back {
-    float: left;
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    background-color: var(--secondary-color);
-    color: var(--white);
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.back:hover {
-    background-color: var(--primary-color);
+.nok.visible {
+    background-color: red; /* Rode achtergrond voor de melding */
 }
