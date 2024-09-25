@@ -1,62 +1,28 @@
-// Pusher configureren met jouw app key en cluster
-const pusher = new Pusher('ffa266f1055f785864eb', {
-    cluster: 'eu' // Jouw Pusher Cluster
-});
-
-// Abonneer op het Pusher-kanaal
-const channel = pusher.subscribe('sufuf-channel');
-
-// Pusher event listener voor het ontvangen van real-time updates van de vrijwilliger
-channel.bind('status-update', function(data) {
-    updateStatus(data.space, data.status);
-});
-
-// Functie om het statusveld voor de IMAM te updaten
-function updateStatus(space, status) {
-    const statusId = `${space}Status`;
-    const nokId = `${space}Nok`;
-    
-    const statusDiv = document.getElementById(statusId);
-    const nokDiv = document.getElementById(nokId);
-    
-    // Reset alle status kleuren
-    statusDiv.style.backgroundColor = 'gray';
-    nokDiv.style.backgroundColor = 'gray';
-
-    if (status === 'ok') {
-        statusDiv.style.backgroundColor = 'green';
-    } else if (status === 'nok') {
-        nokDiv.style.backgroundColor = 'red';
-    }
-}
+// Globale variabele om de huidige gebruiker op te slaan
+let currentUserRole;
 
 // Functie om in te loggen
 function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-
-    if (username === 'MEFEN' && password === 'Sufuf2020') {
-        sessionStorage.setItem('loggedIn', true); // Sla de inlogstatus op
+    
+    // Simuleer inlogvalidatie
+    if (username && password) {
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('homescreen').classList.remove('hidden');
     } else {
-        alert('Ongeldige inloggegevens');
+        alert('Vul alstublieft gebruikersnaam en wachtwoord in.');
     }
 }
 
-// Functie om uit te loggen
-function logout() {
-    sessionStorage.removeItem('loggedIn'); // Verwijder de inlogstatus
-    document.getElementById('homescreen').classList.add('hidden');
-    document.getElementById('loginScreen').classList.remove('hidden');
-}
-
-// Functie om de rol van de gebruiker te kiezen
+// Functie om de rol te kiezen
 function chooseRole(role) {
-    document.getElementById('homescreen').classList.add('hidden');
+    currentUserRole = role;
     if (role === 'imam') {
+        document.getElementById('homescreen').classList.add('hidden');
         document.getElementById('imamScreen').classList.remove('hidden');
     } else if (role === 'vrijwilliger') {
+        document.getElementById('homescreen').classList.add('hidden');
         document.getElementById('vrijwilligerScreen').classList.remove('hidden');
     }
 }
@@ -64,38 +30,35 @@ function chooseRole(role) {
 // Functie om een ruimte te kiezen
 function chooseSpace(space) {
     document.getElementById('vrijwilligerScreen').classList.add('hidden');
-    document.getElementById('spaceScreen').classList.remove('hidden');
     document.getElementById('spaceTitle').innerText = space.charAt(0).toUpperCase() + space.slice(1);
+    document.getElementById('spaceScreen').classList.remove('hidden');
 }
 
-// Functie voor de vrijwilliger om de status naar de server te sturen
+// Functie om een status te verzenden
 function sendStatus(status) {
-    const space = document.getElementById('spaceTitle').innerText.toLowerCase();
-    
-    fetch('https://sufuf-backend-2.onrender.com/status', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ space: space, status: status }),
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch((error) => console.error('Error:', error));
+    const statusMessage = document.getElementById('statusMessage');
+    statusMessage.innerText = `Je hebt ${status === 'ok' ? 'OK' : 'NOK'} geselecteerd.`;
+    statusMessage.className = 'status-message ' + status + ' visible'; // Voegt de juiste klasse toe
 }
 
-// Functie om terug te gaan naar de vorige pagina
-function goBack(page) {
-    const pages = ['loginScreen', 'homescreen', 'imamScreen', 'vrijwilligerScreen', 'spaceScreen'];
-    pages.forEach(p => document.getElementById(p).classList.add('hidden'));
-    document.getElementById(page).classList.remove('hidden');
-}
-
-// Controleer bij het laden van de pagina of de gebruiker is ingelogd
-window.onload = function() {
-    const loggedIn = sessionStorage.getItem('loggedIn');
-    if (loggedIn) {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('homescreen').classList.remove('hidden');
+// Functie om terug te gaan naar een vorige scherm
+function goBack(previousScreen) {
+    if (previousScreen === 'loginScreen') {
+        document.getElementById('loginScreen').classList.remove('hidden');
+        document.getElementById('homescreen').classList.add('hidden');
+    } else {
+        document.getElementById(previousScreen).classList.remove('hidden');
+        document.getElementById('spaceScreen').classList.add('hidden');
     }
-};
+}
+
+// Functie om uit te loggen
+function logout() {
+    // Hier kun je eventuele uitloglogica toevoegen, bijvoorbeeld token verwijderen
+    alert("Je bent uitgelogd.");
+    document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById('homescreen').classList.add('hidden');
+    document.getElementById('imamScreen').classList.add('hidden');
+    document.getElementById('vrijwilligerScreen').classList.add('hidden');
+    document.getElementById('spaceScreen').classList.add('hidden');
+}
