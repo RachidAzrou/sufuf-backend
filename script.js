@@ -11,10 +11,11 @@ window.onload = function() {
     const role = getCookie('role');
 
     if (username && role) {
+        // Als de gebruiker ingelogd is, laad de juiste pagina
         if (role === 'imam') {
-            showImamPage(); // Functie om de imam pagina weer te geven
+            showImamPage();
         } else if (role === 'vrijwilliger') {
-            showVrijwilligerPage(); // Functie om de vrijwilliger pagina weer te geven
+            showVrijwilligerPage();
         }
     } else {
         // Als er geen cookies zijn, toon de loginpagina
@@ -33,6 +34,7 @@ function login() {
         return;
     }
 
+    // API-aanroep voor inloggen
     fetch('http://localhost:5001/login', {
         method: 'POST',
         headers: {
@@ -40,7 +42,13 @@ function login() {
         },
         body: JSON.stringify({ username, password }),
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            // Als er een fout is, toon de foutmelding
+            return response.json().then(data => { throw new Error(data.message); });
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.message === 'Inloggen succesvol') {
             // Zet de juiste pagina afhankelijk van de rol
@@ -55,7 +63,7 @@ function login() {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Er is een probleem opgetreden. Probeer het opnieuw.');
+        alert('Inloggen mislukt: ' + error.message);
     });
 }
 
@@ -92,7 +100,7 @@ function sendStatus(status) {
     .then(response => response.json())
     .then(data => {
         alert(data.message);
-        goBack('vrijwilligerScreen'); // Terug naar de vrijwilliger scherm
+        goBack('vrijwilligerScreen'); // Terug naar het vrijwilliger-scherm
     })
     .catch(error => {
         console.error('Error:', error);
