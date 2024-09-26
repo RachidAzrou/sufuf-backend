@@ -1,86 +1,44 @@
-const pusher = new Pusher('ffa266f1055f785864eb', {
-    cluster: 'eu'
+const express = require('express'); // Zorg ervoor dat express is geïnstalleerd
+const Pusher = require('pusher'); // Zorg ervoor dat pusher is geïnstalleerd
+const path = require('path'); // Voor het bedienen van statische bestanden
+
+const app = express();
+const port = 5001;
+
+// Pusher configureren met jouw app key en cluster
+const pusher = new Pusher({
+    appId: '1869623',        // Jouw Pusher App ID
+    key: 'ffa266f1055f785864eb', // Jouw Pusher Key
+    secret: '8ea27524a66990e1dc58', // Jouw Pusher Secret
+    cluster: 'eu',             // Jouw Pusher Cluster
+    useTLS: true               // Zorg ervoor dat TLS wordt gebruikt voor veilige verbindingen
 });
 
-const channel = pusher.subscribe('sufuf-channel');
+// Middleware om JSON-lichaam te parseren
+app.use(express.json());
 
-channel.bind('status-update', function(data) {
-    updateStatus(data.space, data.status);
+// Middleware om statische bestanden te serveren (zoals index.html)
+app.use(express.static(path.join(__dirname)));
+
+// Voeg de GET-route toe om index.html te serveren
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-function updateStatus(space, status) {
-    const statusId = `${space}Status`;
-    const nokId = `${space}Nok`;
-
-    const statusDiv = document.getElementById(statusId);
-    const nokDiv = document.getElementById(nokId);
-
-    // Reset alle status kleuren
-    statusDiv.style.backgroundColor = 'gray';
-    nokDiv.style.backgroundColor = 'gray';
-
-    if (status === 'ok') {
-        statusDiv.style.backgroundColor = 'green';
-    } else if (status === 'nok') {
-        nokDiv.style.backgroundColor = 'red';
-    }
-}
-
-function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (username === 'MEFEN' && password === 'Sufuf2020') {
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('homescreen').classList.remove('hidden');
-    } else {
-        alert('Ongeldige inloggegevens');
-    }
-}
-
-function chooseRole(role) {
-    document.getElementById('homescreen').classList.add('hidden');
-    if (role === 'imam') {
-        document.getElementById('imamScreen').classList.remove('hidden');
-    } else if (role === 'vrijwilliger') {
-        document.getElementById('vrijwilligerScreen').classList.remove('hidden');
-    }
-}
-
-function chooseSpace(space) {
-    document.getElementById('vrijwilligerScreen').classList.add('hidden');
-    document.getElementById('spaceScreen').classList.remove('hidden');
-    document.getElementById('spaceTitle').innerText = space.charAt(0).toUpperCase() + space.slice(1);
-}
-
-function sendStatus(status) {
-    const space = document.getElementById('spaceTitle').innerText.toLowerCase();
-
-    fetch('https://sufuf-backend-2.onrender.com/status', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ space: space, status: status }),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Netwerkreactie was niet ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data);
-        alert('Status succesvol verzonden');
-    })
-    .catch((error) => {
-        console.error('Fout:', error);
-        alert('Er is een fout opgetreden bij het verzenden van de status');
+// Endpoint voor status updates
+app.post('/status', (req, res) => {
+    const { space, status } = req.body;
+    
+    // Verstuur de status via Pusher
+    pusher.trigger('sufuf-channel', 'status-update', {
+        space: space,
+        status: status,
     });
-}
 
-function goBack(page) {
-    const pages = ['loginScreen', 'homescreen', 'imamScreen', 'vrijwilligerScreen', 'spaceScreen'];
-    pages.forEach(p => document.getElementById(p).classList.add('hidden'));
-    document.getElementById(page).classList.remove('hidden');
-}
+    res.json({ message: 'Status verstuurd' });
+});
+
+// Start de server
+app.listen(port, () => {
+    console.log(`Server draait op http://localhost:${port}`);
+});
