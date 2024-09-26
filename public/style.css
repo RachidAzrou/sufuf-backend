@@ -1,0 +1,84 @@
+/* Algemene stijl */
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+}
+
+.screen {
+    display: none; /* Verberg alle schermen standaard */
+    padding: 20px;
+}
+
+.screen.hidden {
+    display: none;
+}
+
+.app-title {
+    font-size: 36px;
+    color: #00796b;
+    margin-bottom: 20px;
+}
+
+.screen-title {
+    font-size: 28px;
+    color: #00796b;
+    margin-top: 20px;
+}
+
+.login-container {
+    margin-top: 50px;
+}
+
+input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 18px;
+    width: 80%;
+    max-width: 400px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #00796b;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #004d40;
+}
+
+/* Centraal uitlijnen van elementen */
+.role-selection, .space-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.space-item {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    margin: 10px 0;
+}
+
+.logout-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
