@@ -1,8 +1,8 @@
 body {
-    font-family: 'Arial', sans-serif; /* Modern lettertype */
+    font-family: 'Arial', sans-serif; 
     text-align: center;
-    padding: 50px;
-    background-color: #e0f7fa; /* Appelblauwzeegroen achtergrond */
+    padding: 20px; /* Vermindering van padding voor mobiele weergave */
+    background-color: #e0f7fa; 
 }
 
 .hidden {
@@ -10,36 +10,54 @@ body {
 }
 
 .app-title {
-    font-size: 36px; /* Grotere titel */
-    font-weight: bold; /* Dikke tekst voor de titel */
-    color: #00796b; /* Appelblauwzeegroen kleur */
-    margin-bottom: 20px; /* Ruimte onder de titel */
+    font-size: 36px; 
+    font-weight: bold; 
+    color: #00796b; 
+    margin-bottom: 20px; 
 }
 
 .room-title {
-    font-size: 28px; /* Grote titel voor de ruimtes */
-    color: #00796b; /* Appelblauwzeegroen kleur */
-    margin-top: 30px; /* Ruimte boven de titel */
-    margin-bottom: 20px; /* Ruimte onder de titel */
+    font-size: 28px; 
+    color: #00796b; 
+    margin: 30px 0 20px; 
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centreren van items */
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column; /* Voor mobiele weergave */
+    align-items: center;
 }
 
 .space {
     margin: 20px 0;
-    padding: 10px; /* Ruimte rondom de ruimte sectie */
-    border: 1px solid #b2dfdb; /* Lichte scheidingslijn */
-    border-radius: 8px; /* Afgeronde hoeken voor de secties */
-    background-color: #ffffff; /* Witte achtergrond voor ruimte sectie */
+    padding: 10px; 
+    border: 1px solid #b2dfdb; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    width: 100%; /* Volledige breedte */
+    max-width: 400px; /* Max breedte voor grote schermen */
 }
 
 .btn {
     padding: 15px 25px;
-    margin: 10px;
+    margin: 10px 0; /* Verticale marge tussen knoppen */
     cursor: pointer;
     border: none;
-    border-radius: 25px; /* Maak knoppen mooi afgerond */
-    font-size: 18px; /* Grotere tekst */
-    background-color: white; /* Witte achtergrond voor knoppen */
-    color: #00796b; /* Appelblauwzeegroen tekst */
+    border-radius: 25px; 
+    font-size: 18px; 
+    background-color: #00796b; /* Aangepaste kleur voor knoppen */
+    color: white; 
+    transition: background-color 0.3s; /* Voor een vloeiende overgang */
+}
+
+.btn:hover {
+    background-color: #005b4f; /* Donkerdere kleur bij hover */
 }
 
 .status {
@@ -48,5 +66,19 @@ body {
     padding: 15px;
     border-radius: 5px;
     color: white;
-    display: inline-block; /* Zorg ervoor dat ze naast elkaar worden weergegeven */
+    display: inline-block; 
+}
+
+@media (max-width: 600px) {
+    .app-title {
+        font-size: 28px; /* Kleinere titel voor mobiel */
+    }
+
+    .room-title {
+        font-size: 24px; /* Kleinere ruimte titel voor mobiel */
+    }
+
+    .btn {
+        width: 90%; /* Volledige breedte voor knoppen op mobiel */
+    }
 }
