@@ -1,0 +1,52 @@
+body {
+    font-family: 'Arial', sans-serif; /* Modern lettertype */
+    text-align: center;
+    padding: 50px;
+    background-color: #e0f7fa; /* Appelblauwzeegroen achtergrond */
+}
+
+.hidden {
+    display: none;
+}
+
+.app-title {
+    font-size: 36px; /* Grotere titel */
+    font-weight: bold; /* Dikke tekst voor de titel */
+    color: #00796b; /* Appelblauwzeegroen kleur */
+    margin-bottom: 20px; /* Ruimte onder de titel */
+}
+
+.room-title {
+    font-size: 28px; /* Grote titel voor de ruimtes */
+    color: #00796b; /* Appelblauwzeegroen kleur */
+    margin-top: 30px; /* Ruimte boven de titel */
+    margin-bottom: 20px; /* Ruimte onder de titel */
+}
+
+.space {
+    margin: 20px 0;
+    padding: 10px; /* Ruimte rondom de ruimte sectie */
+    border: 1px solid #b2dfdb; /* Lichte scheidingslijn */
+    border-radius: 8px; /* Afgeronde hoeken voor de secties */
+    background-color: #ffffff; /* Witte achtergrond voor ruimte sectie */
+}
+
+.btn {
+    padding: 15px 25px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px; /* Maak knoppen mooi afgerond */
+    font-size: 18px; /* Grotere tekst */
+    background-color: white; /* Witte achtergrond voor knoppen */
+    color: #00796b; /* Appelblauwzeegroen tekst */
+}
+
+.status {
+    font-size: 20px;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    display: inline-block; /* Zorg ervoor dat ze naast elkaar worden weergegeven */
+}
