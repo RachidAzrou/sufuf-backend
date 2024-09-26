@@ -1,87 +1,85 @@
+/* Algemene stijl */
 body {
     font-family: 'Arial', sans-serif;
     text-align: center;
-    padding: 50px;
-    background-color: #e0f7fa;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+}
+
+.screen {
+    display: none; /* Verberg alle schermen standaard */
+    padding: 20px;
+}
+
+.screen.hidden {
+    display: none;
 }
 
 .app-title {
-    font-size: 48px; /* Grotere titel */
-    font-weight: bold;
+    font-size: 36px;
     color: #00796b;
     margin-bottom: 20px;
 }
 
-.input-group {
-    display: flex;
-    flex-direction: column; /* Stapel de invoervelden en de knop onder elkaar */
-    align-items: center;
+.screen-title {
+    font-size: 28px;
+    color: #00796b;
+    margin-top: 20px;
 }
 
-.input-group input {
-    margin: 10px 0;
-    padding: 15px;
-    font-size: 20px;
-    width: 80%; /* Brede invoervelden */
+.login-container {
+    margin-top: 50px;
 }
 
-.btn {
-    padding: 15px 25px;
-    margin: 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 25px;
+input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
     font-size: 18px;
+    width: 80%;
+    max-width: 400px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
     background-color: #00796b;
-    color: white; /* Witte tekst voor knoppen */
+    color: white;
+    cursor: pointer;
 }
 
-.back-btn, .logout-btn {
-    position: absolute;
-    top: 20px;
+button:hover {
+    background-color: #004d40;
 }
 
-.back-btn {
-    left: 20px; /* Linkerbovenhoek */
-}
-
-.logout-btn {
-    right: 20px; /* Rechteronderhoek */
-}
-
-.role-title {
-    font-size: 36px; /* Grotere titel */
-    color: #00796b;
-    margin: 30px 0;
-}
-
-.role-buttons {
+/* Centraal uitlijnen van elementen */
+.role-selection, .space-container {
     display: flex;
-    justify-content: center;
-    gap: 20px; /* Ruimte tussen de knoppen */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
 
-.room-title {
-    font-size: 36px; /* Grotere titel */
-    color: #00796b;
-    margin: 30px 0;
+.space-item {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    margin: 10px 0;
 }
 
-.room {
-    margin: 20px 0;
+.logout-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 }
 
-.room-name {
-    font-size: 28px; /* Grote naam voor ruimtes */
-    color: #00796b; /* Ruimte kleur */
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
 }
 
-.ok-btn, .nok-btn {
-    width: 100px; /* Brede knoppen */
-    margin: 5px; /* Ruimte tussen de knoppen */
-    background-color: #4CAF50; /* Groene achtergrond voor OK */
-}
-
-.nok-btn {
-    background-color: #f44336; /* Rode achtergrond voor NOK */
-}
