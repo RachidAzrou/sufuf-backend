@@ -1,22 +1,8 @@
-* {
-    box-sizing: border-box; /* Zorg ervoor dat padding en margin niet de totale breedte beïnvloeden */
-}
-
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif; /* Modern lettertype */
     text-align: center;
-    padding: 20px;
-    background-color: #e0f7fa;
-    margin: 0;
-}
-
-.container {
-    max-width: 600px; /* Max breedte voor een betere leesbaarheid */
-    margin: 0 auto; /* Center de container */
-    padding: 20px;
-    border-radius: 10px; /* Afgeronde hoeken */
-    background-color: #ffffff; /* Witte achtergrond voor de container */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Schaduw voor diepte */
+    padding: 50px;
+    background-color: #e0f7fa; /* Appelblauwzeegroen achtergrond */
 }
 
 .hidden {
@@ -24,24 +10,25 @@ body {
 }
 
 .app-title {
-    font-size: 36px;
-    font-weight: bold;
-    color: #00796b;
-    margin-bottom: 20px;
+    font-size: 36px; /* Grotere titel */
+    font-weight: bold; /* Dikke tekst voor de titel */
+    color: #00796b; /* Appelblauwzeegroen kleur */
+    margin-bottom: 20px; /* Ruimte onder de titel */
 }
 
 .room-title {
-    font-size: 28px;
-    color: #00796b;
-    margin: 30px 0 20px; /* Ruimte boven en onder */
+    font-size: 28px; /* Grote titel voor de ruimtes */
+    color: #00796b; /* Appelblauwzeegroen kleur */
+    margin-top: 30px; /* Ruimte boven de titel */
+    margin-bottom: 20px; /* Ruimte onder de titel */
 }
 
 .space {
     margin: 20px 0;
-    padding: 15px;
-    border: 1px solid #b2dfdb;
-    border-radius: 8px;
-    background-color: #ffffff;
+    padding: 10px; /* Ruimte rondom de ruimte sectie */
+    border: 1px solid #b2dfdb; /* Lichte scheidingslijn */
+    border-radius: 8px; /* Afgeronde hoeken voor de secties */
+    background-color: #ffffff; /* Witte achtergrond voor ruimte sectie */
 }
 
 .btn {
@@ -49,44 +36,17 @@ body {
     margin: 10px;
     cursor: pointer;
     border: none;
-    border-radius: 25px;
-    font-size: 18px;
-    background-color: #00796b; /* Groene achtergrond */
-    color: white; /* Witte tekst */
-    transition: background-color 0.3s, transform 0.2s; /* Transitie effect */
-}
-
-.btn:hover {
-    background-color: #005b5a; /* Donkerder groen bij hover */
-    transform: scale(1.05); /* Lichte vergroting bij hover */
+    border-radius: 25px; /* Maak knoppen mooi afgerond */
+    font-size: 18px; /* Grotere tekst */
+    background-color: white; /* Witte achtergrond voor knoppen */
+    color: #00796b; /* Appelblauwzeegroen tekst */
 }
 
 .status {
     font-size: 20px;
     margin: 10px 0;
-    padding: 10px;
+    padding: 15px;
     border-radius: 5px;
     color: white;
-    display: inline-block;
-    width: 80px; /* Consistente breedte */
-    background-color: gray; /* Standaard achtergrondkleur */
-}
-
-#bovenverdiepingStatus, #garageStatus, #vrouwenStatus {
-    background-color: green; /* Standaardstatuskleur voor OK */
-}
-
-#bovenverdiepingNok, #garageNok, #vrouwenNok {
-    background-color: red; /* Standaardstatuskleur voor NOK */
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .btn {
-        width: 100%; /* Knoppen vullen de breedte op kleinere schermen */
-    }
-
-    .container {
-        padding: 15px; /* Verminder padding op mobiele apparaten */
-    }
+    display: inline-block; /* Zorg ervoor dat ze naast elkaar worden weergegeven */
 }
