@@ -1,36 +1,35 @@
-const express = require('express');
-const Pusher = require('pusher');
-const path = require('path');
+const express = require('express'); // Zorg ervoor dat express is geïnstalleerd
+const Pusher = require('pusher'); // Zorg ervoor dat pusher is geïnstalleerd
+const path = require('path'); // Voor het bedienen van statische bestanden
 
-// Maak een express-app
 const app = express();
 const port = 5001;
 
-// Pusher configureren
+// Pusher configureren met jouw app key en cluster
 const pusher = new Pusher({
-    appId: '1869623',
-    key: 'ffa266f1055f785864eb',
-    secret: '8ea27524a66990e1dc58',
-    cluster: 'eu',
-    useTLS: true
+    appId: '1869623',        // Jouw Pusher App ID
+    key: 'ffa266f1055f785864eb', // Jouw Pusher Key
+    secret: '8ea27524a66990e1dc58', // Jouw Pusher Secret
+    cluster: 'eu',             // Jouw Pusher Cluster
+    useTLS: true               // Zorg ervoor dat TLS wordt gebruikt voor veilige verbindingen
 });
 
 // Middleware om JSON-lichaam te parseren
 app.use(express.json());
 
-// Statische bestanden serveren (HTML, CSS, JS)
-app.use(express.static(path.join(__dirname, 'public')));
+// Middleware om statische bestanden te serveren (zoals index.html)
+app.use(express.static(path.join(__dirname)));
 
-// Stuur index.html als basispagina
+// Voeg de GET-route toe om index.html te serveren
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// API-endpoint voor status updates
+// Endpoint voor status updates
 app.post('/status', (req, res) => {
     const { space, status } = req.body;
-
-    // Verstuur de status naar Pusher
+    
+    // Verstuur de status via Pusher
     pusher.trigger('sufuf-channel', 'status-update', {
         space: space,
         status: status,
@@ -39,7 +38,7 @@ app.post('/status', (req, res) => {
     res.json({ message: 'Status verstuurd' });
 });
 
-// Server starten
+// Start de server
 app.listen(port, () => {
     console.log(`Server draait op http://localhost:${port}`);
 });
