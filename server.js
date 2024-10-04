@@ -1,6 +1,7 @@
 const express = require('express');
 const Pusher = require('pusher');
 const path = require('path');
+const cors = require('cors'); // Voeg CORS toe
 
 const app = express();
 const port = process.env.PORT || 5000; // Gebruik omgevingspoort van Render
@@ -15,6 +16,7 @@ const pusher = new Pusher({
 });
 
 // Middleware om JSON te parseren
+app.use(cors()); // Schakel CORS in
 app.use(express.json());
 
 // Statische bestanden zoals HTML en CSS serveren
@@ -30,9 +32,16 @@ app.post('/status', (req, res) => {
     // Trigger Pusher event
     pusher.trigger('sufuf-channel', 'status-update', {
         status: status
+    })
+    .then(() => {
+        // Succesvolle trigger
+        res.json({ message: 'Status verstuurd' });
+    })
+    .catch(err => {
+        // Fout bij het triggeren
+        console.error('Pusher error:', err);
+        res.status(500).json({ message: 'Fout bij het versturen van status' });
     });
-
-    res.json({ message: 'Status verstuurd' });
 });
 
 // Start de server
