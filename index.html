@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>SUFUF MEFEN</h1>
-        <button onclick="location.href='/viewer'">VIEWER</button>
-        <button onclick="location.href='/ext'">EXT</button>
+    <div id="homeScreen">
+        <h1 class="app-title">SUFUF MEFEN</h1>
+        <button class="btn" onclick="navigateTo('viewer')">VIEWER</button>
+        <button class="btn" onclick="navigateTo('ext')">EXT</button>
     </div>
+    
+    <div id="viewerScreen" class="hidden">
+        <h1 class="page-title">MOSKEE +1</h1>
+        <div id="nokLight" class="light">NOK</div>
+        <div id="okLight" class="light">OK</div>
+        <button class="btn" onclick="goBack()">Terug</button>
+    </div>
+    
+    <div id="extScreen" class="hidden">
+        <h1 class="page-title">MOSKEE +1</h1>
+        <div class="light-row">
+            <div id="nokLightExt" class="light">NOK</div>
+            <button class="btn switch" onclick="sendStatus('nok')">Schakel NOK</button>
+        </div>
+        <div class="light-row">
+            <div id="okLightExt" class="light">OK</div>
+            <button class="btn switch" onclick="sendStatus('ok')">Schakel OK</button>
+        </div>
+        <button class="btn" onclick="goBack()">Terug</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
