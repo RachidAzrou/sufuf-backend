@@ -1,56 +1,29 @@
 const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
+const Pusher = require('pusher');
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
+const port = 5000;
 
-let lightState = {
-    nok: false,
-    ok: false
-};
-
-app.use(express.static('public'));
-
-// Routes
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+const pusher = new Pusher({
+    appId: 'YOUR_PUSHER_APP_ID',
+    key: 'YOUR_PUSHER_KEY',
+    secret: 'YOUR_PUSHER_SECRET',
+    cluster: 'YOUR_PUSHER_CLUSTER',
+    useTLS: true
 });
 
-app.get('/viewer', (req, res) => {
-    res.sendFile(__dirname + '/viewer.html');
-});
+app.use(express.json());
 
-app.get('/ext', (req, res) => {
-    res.sendFile(__dirname + '/ext.html');
-});
+app.post('/status', (req, res) => {
+    const { status } = req.body;
 
-// WebSocket communicatie
-io.on('connection', (socket) => {
-    console.log('A user connected');
-    
-    // Stuur de huidige lichtstatus naar de nieuwe client
-    socket.emit('light-update', lightState);
-
-    // Ontvang wijzigingen van de EXT en update de lichtstatus
-    socket.on('switch-light', (data) => {
-        if (data.light === 'ok') {
-            lightState.ok = true;
-            lightState.nok = false;
-        } else if (data.light === 'nok') {
-            lightState.nok = true;
-            lightState.ok = false;
-        }
-        // Stuur de update naar alle clients
-        io.emit('light-update', lightState);
+    // Trigger Pusher event
+    pusher.trigger('sufuf-channel', 'status-update', {
+        status: status,
     });
 
-    socket.on('disconnect', () => {
-        console.log('A user disconnected');
-    });
+    res.json({ success: true });
 });
 
-// Start de server
-server.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
