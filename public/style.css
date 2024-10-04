@@ -44,15 +44,16 @@ h1 {
     margin: 20px auto; /* Center de lichten */
     font-weight: bold;
     color: white; /* Witte tekstkleur */
+    background-color: gray; /* Standaard grijze kleur */
 }
 
 /* Kleuren voor de lichten */
 .light.ok {
-    background-color: green; /* Groene licht */
+    background-color: gray; /* Standaard kleur */
 }
 
 .light.nok {
-    background-color: red; /* Rode licht */
+    background-color: gray; /* Standaard kleur */
 }
 
 /* Stijl voor schakelaars */
@@ -65,6 +66,7 @@ h1 {
     position: relative;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 0 auto; /* Center de schakelaars */
 }
 
 .switch::before {
