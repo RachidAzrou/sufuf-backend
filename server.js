@@ -1,44 +1,56 @@
-const express = require('express'); // Zorg ervoor dat express is geïnstalleerd
-const Pusher = require('pusher'); // Zorg ervoor dat pusher is geïnstalleerd
-const path = require('path'); // Voor het bedienen van statische bestanden
-
+const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
 const app = express();
-const port = 5001;
+const server = http.createServer(app);
+const io = new Server(server);
 
-// Pusher configureren met jouw app key en cluster
-const pusher = new Pusher({
-    appId: '1869623',        // Jouw Pusher App ID
-    key: 'ffa266f1055f785864eb', // Jouw Pusher Key
-    secret: '8ea27524a66990e1dc58', // Jouw Pusher Secret
-    cluster: 'eu',             // Jouw Pusher Cluster
-    useTLS: true               // Zorg ervoor dat TLS wordt gebruikt voor veilige verbindingen
-});
+let lightState = {
+    nok: false,
+    ok: false
+};
 
-// Middleware om JSON-lichaam te parseren
-app.use(express.json());
+app.use(express.static('public'));
 
-// Middleware om statische bestanden te serveren (zoals index.html)
-app.use(express.static(path.join(__dirname)));
-
-// Voeg de GET-route toe om index.html te serveren
+// Routes
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(__dirname + '/index.html');
 });
 
-// Endpoint voor status updates
-app.post('/status', (req, res) => {
-    const { space, status } = req.body;
+app.get('/viewer', (req, res) => {
+    res.sendFile(__dirname + '/viewer.html');
+});
+
+app.get('/ext', (req, res) => {
+    res.sendFile(__dirname + '/ext.html');
+});
+
+// WebSocket communicatie
+io.on('connection', (socket) => {
+    console.log('A user connected');
     
-    // Verstuur de status via Pusher
-    pusher.trigger('sufuf-channel', 'status-update', {
-        space: space,
-        status: status,
+    // Stuur de huidige lichtstatus naar de nieuwe client
+    socket.emit('light-update', lightState);
+
+    // Ontvang wijzigingen van de EXT en update de lichtstatus
+    socket.on('switch-light', (data) => {
+        if (data.light === 'ok') {
+            lightState.ok = true;
+            lightState.nok = false;
+        } else if (data.light === 'nok') {
+            lightState.nok = true;
+            lightState.ok = false;
+        }
+        // Stuur de update naar alle clients
+        io.emit('light-update', lightState);
     });
 
-    res.json({ message: 'Status verstuurd' });
+    socket.on('disconnect', () => {
+        console.log('A user disconnected');
+    });
 });
 
 // Start de server
-app.listen(port, () => {
-    console.log(`Server draait op http://localhost:${port}`);
+server.listen(3000, () => {
+    console.log('Server running on http://localhost:3000');
 });
