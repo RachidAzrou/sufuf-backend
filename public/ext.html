@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +7,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>EXT</h1>
-    <div id="okLight" class="light">OK</div>
-    <button onclick="sendStatus('ok')">Schakel OK</button>
-    
-    <div id="nokLight" class="light">NOK</div>
-    <button onclick="sendStatus('nok')">Schakel NOK</button>
+    <h1>MOSKEE +1</h1>
+    <div class="light ok" id="okLight">OK</div>
+    <div class="light nok" id="nokLight">NOK</div>
 
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script src="script.js"></script>
+    <div>
+        <div class="switch" id="okSwitch" onclick="toggleSwitch('ok')"></div>
+        <div class="switch" id="nokSwitch" onclick="toggleSwitch('nok')"></div>
+    </div>
+
+    <script>
+        function toggleSwitch(type) {
+            const okSwitch = document.getElementById('okSwitch');
+            const nokSwitch = document.getElementById('nokSwitch');
+
+            if (type === 'ok') {
+                okSwitch.classList.toggle('active');
+                nokSwitch.classList.remove('active');
+                updateLight('ok');
+            } else {
+                nokSwitch.classList.toggle('active');
+                okSwitch.classList.remove('active');
+                updateLight('nok');
+            }
+        }
+
+        function updateLight(type) {
+            const okLight = document.getElementById('okLight');
+            const nokLight = document.getElementById('nokLight');
+
+            if (type === 'ok') {
+                okLight.classList.add('ok');
+                nokLight.classList.remove('nok');
+                // Trigger Pusher event hier om de VIEWER te informeren
+            } else {
+                nokLight.classList.add('nok');
+                okLight.classList.remove('ok');
+                // Trigger Pusher event hier om de VIEWER te informeren
+            }
+        }
+    </script>
 </body>
 </html>
