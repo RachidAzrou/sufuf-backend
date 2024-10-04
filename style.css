@@ -1,53 +1,68 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     text-align: center;
-    background-color: #f0f0f0;
-    margin: 0;
     padding: 20px;
+    background-color: #f0f0f0;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.hidden {
+    display: none;
 }
 
-h1 {
-    font-size: 2.5em;
+.app-title {
+    font-size: 36px;
+    color: #00796b;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 28px;
+    color: #00796b;
     margin-bottom: 20px;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 1.5em;
-    margin: 20px;
+.btn {
+    padding: 15px 30px;
+    margin: 10px;
     cursor: pointer;
-}
-
-.light-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.light {
-    width: 200px;
-    height: 100px;
-    background-color: grey;
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    color: white;
+    font-size: 18px;
+    background-color: white;
+    border: 2px solid #00796b;
+    color: #00796b;
     border-radius: 10px;
 }
 
+.btn:hover {
+    background-color: #00796b;
+    color: white;
+}
+
+.light {
+    font-size: 40px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: gray;
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.light-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .switch {
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
+    margin-left: 20px;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
 }
