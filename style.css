@@ -1,84 +1,53 @@
 body {
-    font-family: 'Arial', sans-serif; 
+    font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px; /* Vermindering van padding voor mobiele weergave */
-    background-color: #e0f7fa; 
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
 }
 
-.hidden {
-    display: none;
-}
-
-.app-title {
-    font-size: 36px; 
-    font-weight: bold; 
-    color: #00796b; 
-    margin-bottom: 20px; 
-}
-
-.room-title {
-    font-size: 28px; 
-    color: #00796b; 
-    margin: 30px 0 20px; 
-}
-
-.screen {
+.container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centreren van items */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.button-group {
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.5em;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.light-container {
     display: flex;
-    flex-direction: column; /* Voor mobiele weergave */
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-.space {
-    margin: 20px 0;
-    padding: 10px; 
-    border: 1px solid #b2dfdb; 
-    border-radius: 8px; 
-    background-color: #ffffff; 
-    width: 100%; /* Volledige breedte */
-    max-width: 400px; /* Max breedte voor grote schermen */
-}
-
-.btn {
-    padding: 15px 25px;
-    margin: 10px 0; /* Verticale marge tussen knoppen */
-    cursor: pointer;
-    border: none;
-    border-radius: 25px; 
-    font-size: 18px; 
-    background-color: #00796b; /* Aangepaste kleur voor knoppen */
-    color: white; 
-    transition: background-color 0.3s; /* Voor een vloeiende overgang */
-}
-
-.btn:hover {
-    background-color: #005b4f; /* Donkerdere kleur bij hover */
-}
-
-.status {
-    font-size: 20px;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 5px;
+.light {
+    width: 200px;
+    height: 100px;
+    background-color: grey;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
     color: white;
-    display: inline-block; 
+    border-radius: 10px;
 }
 
-@media (max-width: 600px) {
-    .app-title {
-        font-size: 28px; /* Kleinere titel voor mobiel */
-    }
-
-    .room-title {
-        font-size: 24px; /* Kleinere ruimte titel voor mobiel */
-    }
-
-    .btn {
-        width: 90%; /* Volledige breedte voor knoppen op mobiel */
-    }
+.switch {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
 }
