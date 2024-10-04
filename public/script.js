@@ -1,27 +1,27 @@
+// Initialiseer Pusher
 const pusher = new Pusher('ffa266f1055f785864eb', {
     cluster: 'eu'
 });
 
-// Subscribe to the channel
+// Abonneer op het kanaal
 const channel = pusher.subscribe('sufuf-channel');
 
-// Bind to the status-update event
+// Bind de status-update gebeurtenis
 channel.bind('status-update', function(data) {
-    updateStatus(data.status);
+    console.log('Received status update:', data); // Logging
+    updateLights(data.status);
 });
 
-// Functie om de status van de lichten te updaten
-function updateStatus(status) {
-    const okLight = document.getElementById('okLight') || document.getElementById('okLightExt');
-    const nokLight = document.getElementById('nokLight') || document.getElementById('nokLightExt');
+// Functie om de lichten bij te werken
+function updateLights(status) {
+    const okLight = document.getElementById('okLight');
+    const nokLight = document.getElementById('nokLight');
 
-    // Reset alle lichten naar grijs
+    // Reset de lichten naar grijs
     okLight.classList.remove('ok');
-    okLight.classList.remove('nok');
-    nokLight.classList.remove('ok');
     nokLight.classList.remove('nok');
 
-    // Update lichten op basis van de status
+    // Update de lichten op basis van de status
     if (status === 'ok') {
         okLight.classList.add('ok'); // Zet het OK licht aan
     } else if (status === 'nok') {
@@ -56,9 +56,9 @@ function toggleLight(light) {
     }
 }
 
-// Functie om status te verzenden naar de server
+// Functie om status naar de server te verzenden
 function sendStatus(status) {
-    fetch('https://sufuf-backend-2.onrender.com/status', {
+    fetch('/status', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ function sendStatus(status) {
         return response.json();
     })
     .then(data => {
-        console.log(data);
+        console.log('Server response:', data); // Logging
     })
     .catch((error) => {
         console.error('Fout:', error);
