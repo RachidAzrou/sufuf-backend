@@ -3,7 +3,7 @@ const Pusher = require('pusher');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 5000; // Gebruik de omgevingspoort van Render
+const port = process.env.PORT || 5000; // Gebruik omgevingspoort van Render
 
 // Pusher configureren met jouw gegevens
 const pusher = new Pusher({
@@ -23,6 +23,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Endpoint om status updates te verwerken
 app.post('/status', (req, res) => {
     const { status } = req.body;
+
+    // Log de ontvangen status voor debugging
+    console.log('Received status:', status);
 
     // Trigger Pusher event
     pusher.trigger('sufuf-channel', 'status-update', {
