@@ -1,59 +1,39 @@
-const pusher = new Pusher('YOUR_PUSHER_KEY', {
-    cluster: 'YOUR_PUSHER_CLUSTER',
+// Pusher configureren voor client-side
+const pusher = new Pusher('ffa266f1055f785864eb', {
+    cluster: 'eu'
 });
 
 const channel = pusher.subscribe('sufuf-channel');
 
-// Real-time update in Viewer
+// Wanneer er een status-update binnenkomt
 channel.bind('status-update', function(data) {
     updateLights(data.status);
 });
 
-// Navigate to pages
-function navigateTo(page) {
-    document.getElementById('homeScreen').classList.add('hidden');
-    if (page === 'viewer') {
-        document.getElementById('viewerScreen').classList.remove('hidden');
-    } else if (page === 'ext') {
-        document.getElementById('extScreen').classList.remove('hidden');
-    }
-}
-
-// Go back to home screen
-function goBack() {
-    document.querySelectorAll('div[id$="Screen"]').forEach(screen => screen.classList.add('hidden'));
-    document.getElementById('homeScreen').classList.remove('hidden');
-}
-
-// Update lights in real-time
+// Functie om de status van de lichten te updaten
 function updateLights(status) {
-    const nokLight = document.getElementById('nokLight');
     const okLight = document.getElementById('okLight');
-    
-    nokLight.classList.remove('red');
-    okLight.classList.remove('green');
+    const nokLight = document.getElementById('nokLight');
 
-    if (status === 'nok') {
-        nokLight.classList.add('red');
-    } else if (status === 'ok') {
-        okLight.classList.add('green');
+    if (status === 'ok') {
+        okLight.style.backgroundColor = 'green';
+        nokLight.style.backgroundColor = 'gray';
+    } else if (status === 'nok') {
+        nokLight.style.backgroundColor = 'red';
+        okLight.style.backgroundColor = 'gray';
     }
 }
 
-// Send status from EXT page
+// Functie om de status naar de server te sturen
 function sendStatus(status) {
-    fetch('https://YOUR_BACKEND_URL/status', {
+    fetch('/status', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ status: status }),
-    }).then(response => {
-        if (!response.ok) {
-            throw new Error('Netwerkfout');
-        }
-        return response.json();
-    }).catch(error => {
-        console.error('Fout:', error);
-    });
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
 }
