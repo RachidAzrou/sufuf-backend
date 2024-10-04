@@ -3,7 +3,7 @@ const Pusher = require('pusher');
 const path = require('path');
 
 const app = express();
-const port = 5000; // Je kunt dit aanpassen naar jouw poort
+const port = process.env.PORT || 5000; // Gebruik de omgevingspoort van Render
 
 // Pusher configureren met jouw gegevens
 const pusher = new Pusher({
