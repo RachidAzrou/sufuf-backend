@@ -37,9 +37,9 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px; /* Vergroot de lichten */
-    height: 150px; /* Vergroot de lichten */
-    font-size: 32px; /* Grotere tekst */
+    width: 200px; /* Vergroot de lichten */
+    height: 200px; /* Vergroot de lichten */
+    font-size: 40px; /* Grotere tekst */
     border-radius: 50%; /* Maak de lichten rond */
     margin: 20px auto; /* Center de lichten */
     font-weight: bold;
@@ -49,16 +49,16 @@ h1 {
 
 /* Kleuren voor de lichten */
 .light.ok {
-    background-color: gray; /* Standaard kleur */
+    background-color: green; /* Groene kleur voor OK licht */
 }
 
 .light.nok {
-    background-color: gray; /* Standaard kleur */
+    background-color: red; /* Rode kleur voor NOK licht */
 }
 
 /* Stijl voor schakelaars */
 .switch {
-    display: inline-block;
+    display: block; /* Maak de schakelaars block elementen */
     width: 60px; /* Grootte van de schakelaar */
     height: 30px; /* Grootte van de schakelaar */
     background-color: #ccc; /* Basis kleur */
@@ -66,7 +66,7 @@ h1 {
     position: relative;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin: 0 auto; /* Center de schakelaars */
+    margin: 10px auto; /* Center de schakelaars */
 }
 
 .switch::before {
@@ -101,9 +101,9 @@ h1 {
     }
 
     .light {
-        width: 120px; /* Kleinere lichten op mobiele apparaten */
-        height: 120px; /* Kleinere lichten op mobiele apparaten */
-        font-size: 24px; /* Kleinere tekst op mobiele apparaten */
+        width: 150px; /* Kleinere lichten op mobiele apparaten */
+        height: 150px; /* Kleinere lichten op mobiele apparaten */
+        font-size: 30px; /* Kleinere tekst op mobiele apparaten */
     }
 
     .switch {
