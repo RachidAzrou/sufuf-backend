@@ -1,39 +1,38 @@
 const express = require('express');
 const Pusher = require('pusher');
 const path = require('path');
-const app = express();
 
-// Pusher configuratie
+const app = express();
+const port = 5000; // Je kunt dit aanpassen naar jouw poort
+
+// Pusher configureren met jouw gegevens
 const pusher = new Pusher({
-    appId: process.env.PUSHER_APP_ID, // Pusher ID uit je Render environment
-    key: process.env.PUSHER_KEY, // Pusher key
-    secret: process.env.PUSHER_SECRET, // Pusher secret
-    cluster: process.env.PUSHER_CLUSTER, // Pusher cluster
+    appId: '1869623',
+    key: 'ffa266f1055f785864eb',
+    secret: '8ea27524a66990e1dc58',
+    cluster: 'eu',
     useTLS: true
 });
 
-// Middleware
+// Middleware om JSON te parseren
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public'))); // Voor statische bestanden
 
-// Status endpoint
+// Statische bestanden zoals HTML en CSS serveren
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Endpoint om status updates te verwerken
 app.post('/status', (req, res) => {
     const { status } = req.body;
 
+    // Trigger Pusher event
     pusher.trigger('sufuf-channel', 'status-update', {
-        status: status,
+        status: status
     });
 
-    res.json({ success: true });
+    res.json({ message: 'Status verstuurd' });
 });
 
-// Frontend route (index.html)
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-});
-
-// Luisteren op de poort
-const port = process.env.PORT || 5000;
+// Start de server
 app.listen(port, () => {
-    console.log(`Server draait op poort ${port}`);
+    console.log(`Server draait op http://localhost:${port}`);
 });
