@@ -14,6 +14,7 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 50px; /* Ruimte tussen de knoppen */
+    flex-wrap: wrap; /* Zorg ervoor dat knoppen op mobiele apparaten onder elkaar kunnen staan */
 }
 
 .main-button {
@@ -83,4 +84,28 @@ h1 {
 
 .switch.active::before {
     transform: translateX(30px); /* Verplaats de knop naar rechts */
+}
+
+/* Mobielvriendelijke stijlen */
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column; /* Plaats knoppen onder elkaar */
+        gap: 20px; /* Verminder ruimte tussen knoppen */
+    }
+
+    .main-button {
+        width: 90%; /* Maak de knoppen breder op mobiele apparaten */
+        font-size: 20px; /* Maak de tekst iets kleiner */
+    }
+
+    .light {
+        width: 120px; /* Kleinere lichten op mobiele apparaten */
+        height: 120px; /* Kleinere lichten op mobiele apparaten */
+        font-size: 24px; /* Kleinere tekst op mobiele apparaten */
+    }
+
+    .switch {
+        width: 50px; /* Kleinere schakelaar op mobiele apparaten */
+        height: 25px; /* Kleinere schakelaar op mobiele apparaten */
+    }
 }
