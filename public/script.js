@@ -18,14 +18,14 @@ function updateLights(status) {
     const nokLight = document.getElementById('nokLight');
 
     // Reset de lichten naar grijs
-    okLight.classList.remove('ok');
-    nokLight.classList.remove('nok');
+    okLight.classList.remove('ok', 'active'); // Verwijder 'active' om grijs weer te geven
+    nokLight.classList.remove('nok', 'active'); // Verwijder 'active' om grijs weer te geven
 
     // Update de lichten op basis van de status
     if (status === 'ok') {
-        okLight.classList.add('ok'); // Zet het OK licht aan
+        okLight.classList.add('ok', 'active'); // Zet het OK licht aan
     } else if (status === 'nok') {
-        nokLight.classList.add('nok'); // Zet het NOK licht aan
+        nokLight.classList.add('nok', 'active'); // Zet het NOK licht aan
     }
 }
 
@@ -37,20 +37,24 @@ function toggleLight(light) {
     // Controleer welke schakelaar is ingeschakeld
     if (light === 'ok') {
         if (okSwitch.classList.contains('active')) {
+            // Schakel uit
             okSwitch.classList.remove('active');
             sendStatus('reset'); // Reset beide lichten
         } else {
+            // Schakel in
             okSwitch.classList.add('active');
-            nokSwitch.classList.remove('active');
+            nokSwitch.classList.remove('active'); // Zorg ervoor dat NOK uit is
             sendStatus('ok'); // Stuur OK status naar de server
         }
     } else if (light === 'nok') {
         if (nokSwitch.classList.contains('active')) {
+            // Schakel uit
             nokSwitch.classList.remove('active');
             sendStatus('reset'); // Reset beide lichten
         } else {
+            // Schakel in
             nokSwitch.classList.add('active');
-            okSwitch.classList.remove('active');
+            okSwitch.classList.remove('active'); // Zorg ervoor dat OK uit is
             sendStatus('nok'); // Stuur NOK status naar de server
         }
     }
