@@ -1,38 +1,86 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     text-align: center;
+    padding: 50px;
     background-color: #e0f7fa;
 }
 
 h1 {
     color: #00796b;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
-.container {
-    padding: 50px;
-}
-
-button {
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    background-color: #00796b;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 10px;
-}
-
-.light {
-    width: 100px;
-    height: 100px;
-    background-color: gray;
-    border-radius: 50%;
-    margin: 20px auto;
+.button-container {
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 24px;
-    color: white;
+    gap: 50px; /* Ruimte tussen de knoppen */
+}
+
+.main-button {
+    padding: 20px 40px; /* Grotere knoppen */
+    font-size: 24px; /* Grotere tekst */
+    border: none;
+    border-radius: 25px; /* Afgeronde hoeken */
+    background-color: #ffffff; /* Witte achtergrond */
+    color: #00796b; /* Kleur van de tekst */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.main-button:hover {
+    background-color: #b2dfdb; /* Lichte schaduw bij hover */
+}
+
+/* Stijl voor de lichten */
+.light {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px; /* Vergroot de lichten */
+    height: 150px; /* Vergroot de lichten */
+    font-size: 32px; /* Grotere tekst */
+    border-radius: 50%; /* Maak de lichten rond */
+    margin: 20px auto; /* Center de lichten */
+    font-weight: bold;
+    color: white; /* Witte tekstkleur */
+}
+
+/* Kleuren voor de lichten */
+.light.ok {
+    background-color: green; /* Groene licht */
+}
+
+.light.nok {
+    background-color: red; /* Rode licht */
+}
+
+/* Stijl voor schakelaars */
+.switch {
+    display: inline-block;
+    width: 60px; /* Grootte van de schakelaar */
+    height: 30px; /* Grootte van de schakelaar */
+    background-color: #ccc; /* Basis kleur */
+    border-radius: 30px; /* Rond de hoeken */
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.switch::before {
+    content: "";
+    position: absolute;
+    width: 26px; /* Grootte van de knop */
+    height: 26px; /* Grootte van de knop */
+    background-color: white; /* Kleur van de knop */
+    border-radius: 50%; /* Maak het rond */
+    transition: transform 0.3s;
+}
+
+/* Actieve schakelaar stijl */
+.switch.active {
+    background-color: #4caf50; /* Groene kleur wanneer actief */
+}
+
+.switch.active::before {
+    transform: translateX(30px); /* Verplaats de knop naar rechts */
 }
